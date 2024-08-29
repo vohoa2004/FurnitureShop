@@ -1,0 +1,29 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+  },
+  "Jwt": {
+    "Key": 
+    "Issuer": 
+    "Audience": 
+    "Subject": 
+    "TokenValidityInMinutes":
+    "RefreshTokenValidityInDays": 
+  },
+  "Vnpay": {
+    "TmnCode": 
+    "HashSecret": 
+    "BaseUrl": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+    "Command": 
+    "CurrCode": 
+    "Version": 
+    "Locale": "vn",
+    "UrlReturn": 
+  }
+}
