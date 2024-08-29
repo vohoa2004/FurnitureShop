@@ -1,0 +1,70 @@
+/* Hero Section */
+.hero {
+    background: #3b5d50;
+    padding: 4rem 0;
+    color: #fff;
+}
+
+/* Product Section */
+.product-section .product-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-section .product-item:hover {
+    transform: translateY(-10px);
+}
+
+.product-section .product-thumbnail {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.product-section .product-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2f2f2f;
+    margin-bottom: 10px;
+}
+
+.product-section .product-price {
+    font-weight: 700;
+    color: #3b5d50;
+    font-size: 20px;
+}
+
+.product-section .icon-cross {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #f9bf29;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product-section .icon-cross img {
+    width: 15px;
+    height: 15px;
+}
+
+.load-more-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3b5d50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    margin-left: 45%;
+}
