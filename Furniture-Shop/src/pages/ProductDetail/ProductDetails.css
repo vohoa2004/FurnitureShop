@@ -6,41 +6,46 @@
 }
 
 /* Hero section */
+
+
+.hero {
+    background: #3b5d50;
+    padding: calc(rem - 30px) 0 0rem 0;
+}
+
 .product-hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #2f4f4f;
     /* Background color */
-    padding: 40px;
+    padding-bottom: 40px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.hero-img-wrap {
+.hero .hero-img-wrap2 {
     flex: 2;
     /* Hình ảnh chiếm phần lớn không gian */
     text-align: center;
 }
 
-.hero-img-wrap img {
-    max-width: 80%;
-    height: auto;
-    object-fit: cover;
-    /* Đảm bảo hình ảnh bao phủ toàn bộ phần khung */
-    border-radius: 10px;
-    /* Dịch chuyển hình ảnh sang bên phải */
-
-    transform: translateX(30%) translateY(-20%);
+.hero .hero-img-wrap2 img {
+    position: relative;
+    margin-top: 0px;
+    z-index: 2;
+    max-width: 500px;
+    margin-left: 20%;
 }
 
 .main-product-img {
-    width: 45%;
-    /* Cho phép hình ảnh lớn hơn */
+    width: 35%;
+    /* Giảm kích thước hình ảnh xuống 35% */
     height: auto;
     object-fit: contain;
     border-radius: 10px;
 }
+
 
 .intro-excerpt {
     flex: 1;

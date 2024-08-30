@@ -30,6 +30,9 @@ const ProductDetails = () => {
     }
 
     function addToCart(customerId, product) {
+        if (customerId == undefined || customerId == null) {
+            return;
+        }
         // Lấy cart hiện tại từ localStorage
         let cart = JSON.parse(localStorage.getItem('cart-furniture')) || {};
 
@@ -79,7 +82,7 @@ const ProductDetails = () => {
             <Header />
             <div className="product-details-container">
                 <div className="hero product-hero">
-                    <div className="hero-img-wrap">
+                    <div className="hero-img-wrap2">
                         <img src={product.imageLink} alt={product.name} className="main-product-img" />
                     </div>
                     <div className="intro-excerpt">

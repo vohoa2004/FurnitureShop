@@ -6,28 +6,43 @@ import './Checkout.css'
 import Hero from '../../components/Hero/Hero'
 import { createOrder } from '../../apis/OrderAPIs'
 import { useAuth } from '../../hooks';
+import PrivacyPopup from '../../components/Privacy/Privacy';
 
 export default function Checkout() {
   const checkoutCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
-
+  if (checkoutCart == []) {
+    navigate("/")
+  }
   const { user, role } = useAuth();
 
   const navigate = useNavigate();
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(0);
+  const [isChecked, setIsChecked] = useState(false); // for privacy and terms
 
   const customerId = user?.userId; // Lấy customerId từ hệ thống authentication
 
   const calculateTotalPrice = () => {
-    return checkoutCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = checkoutCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    return total;
   };
 
   const handleChange = (event) => {
     setSelectedPaymentMethod(Number(event.target.value));
   };
 
+  const handleChangeCheckBox = () => {
+    // Toggle trạng thái của checkbox
+    setIsChecked(!isChecked);
+  };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault() // ngan form tu redirect, very important!!
+    if (!isChecked) {
+      alert("You must agree to the Privacy and Terms before placing the order.");
+      return;
+    }
     try {
       if (orderDTO.paymentMethod > 0) {
         localStorage.setItem('orderDTO', JSON.stringify(orderDTO));
@@ -359,7 +374,7 @@ export default function Checkout() {
                         />
                         <label
                           htmlFor="paymentBank"
-                          className="d-block"
+                          // className="d-block"
                           data-bs-toggle="collapse"
                           href="#collapsebank"
                           role="button"
@@ -371,72 +386,11 @@ export default function Checkout() {
                         <div className="collapse" id="collapsebank">
                           <div className="py-2">
                             <p className="mb-0">
-                              {/* Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account. */}
                               Pay money when you receive product delivered.
                             </p>
                           </div>
                         </div>
                       </div>
-
-                      {/* <div className="form-group mb-3">
-                        <input
-                          type="radio"
-                          id="paymentCheque"
-                          name="paymentMethod"
-                          value="cheque"
-                          checked={selectedPaymentMethod === 'cheque'}
-                          onChange={handleChange}
-                          required
-                        />
-                        <label
-                          htmlFor="paymentCheque"
-                          className="d-block"
-                          data-bs-toggle="collapse"
-                          href="#collapsecheque"
-                          role="button"
-                          aria-expanded={selectedPaymentMethod === 'cheque'}
-                          aria-controls="collapsecheque"
-                        >
-                          Cheque Payment
-                        </label>
-                        <div className="collapse" id="collapsecheque">
-                          <div className="py-2">
-                            <p className="mb-0">
-                              Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.
-                            </p>
-                          </div>
-                        </div>
-                      </div> */}
-
-                      {/* <div className="form-group mb-5">
-                        <input
-                          type="radio"
-                          id="paymentPaypal"
-                          name="paymentMethod"
-                          value="paypal"
-                          checked={selectedPaymentMethod === 'paypal'}
-                          onChange={handleChange}
-                          required
-                        />
-                        <label
-                          htmlFor="paymentPaypal"
-                          className="d-block"
-                          data-bs-toggle="collapse"
-                          href="#collapsepaypal"
-                          role="button"
-                          aria-expanded={selectedPaymentMethod === 'paypal'}
-                          aria-controls="collapsepaypal"
-                        >
-                          Paypal
-                        </label>
-                        <div className="collapse" id="collapsepaypal">
-                          <div className="py-2">
-                            <p className="mb-0">
-                              Make your payment using Paypal. Please follow the instructions on the Paypal site to complete your payment.
-                            </p>
-                          </div>
-                        </div>
-                      </div> */}
 
                       <div className="form-group mb-5">
                         <input
@@ -450,7 +404,7 @@ export default function Checkout() {
                         />
                         <label
                           htmlFor="paymentVNPay"
-                          className="d-block"
+                          // className="d-block"
                           data-bs-toggle="collapse"
                           href="#collapsevnpay"
                           role="button"
@@ -467,13 +421,41 @@ export default function Checkout() {
                           </div>
                         </div>
                       </div>
+
+                      {/* privacy and term */}
+
+                      <input
+                        type="checkbox"
+                        id="privacy"
+                        name="privacyAgree"
+                        checked={isChecked}
+                        onChange={handleChangeCheckBox}
+                        required
+                      />
+                      <label
+                        htmlFor="privacy"
+                        // className="d-block"
+                        data-bs-toggle="collapse"
+                        href="#collapseprivacy"
+                        role="button"
+                        aria-expanded={isChecked}
+                        aria-controls="collapseprivacy"
+                      >
+                        I agree and commit with your Privacy and Terms
+                      </label>
+                      <div className="collapse" id="collapseprivacy">
+                        <div className="py-2">
+                          <p className="mb-0">
+                            By clicking to Place Order button, you will create an order, make sure you know and agree our {' '}<PrivacyPopup></PrivacyPopup>.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* end privacy and term */}
+                      <br /><br />
                       <button className="btn btn-black btn-lg py-3 btn-block" onClick={handleSubmit}>Place Order</button>
 
                     </form>
-                    {/* end payment method description */}
-
-                    {/* <div className="form-group">
-                    </div> */}
 
                   </div>
                 </div>
@@ -488,11 +470,6 @@ export default function Checkout() {
       {/* <!-- Start Footer Section-- > */}
       <Footer></Footer>
       {/* <!--End Footer Section-- >	 */}
-
-
-      {/* <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/tiny-slider.js"></script>
-      <script src="js/custom.js"></script> */}
     </div>
   )
 }

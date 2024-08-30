@@ -18,9 +18,13 @@ export default function Cart() {
 
     const cart = useMemo(() => {
         return JSON.parse(localStorage.getItem('cart-furniture')) || {};
-    }, []); console.log("All Cart items: ", cart)
+    }, []);
+    console.log("All Cart items: ", cart)
 
     useEffect(() => {
+        if (customerId === undefined) {
+            return; // Nếu customerId là undefined, không thực hiện gì và không load trang cart
+        }
         // Lấy cart từ localStorage
         console.log("ID to get cart:", customerId)
 

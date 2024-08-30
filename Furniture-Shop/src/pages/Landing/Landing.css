@@ -158,7 +158,6 @@ a.more {
 .hero .intro-excerpt {
     position: relative;
     z-index: 4;
-    margin-left: 20%;
 }
 
 @media (min-width: 992px) {
@@ -196,7 +195,6 @@ a.more {
         right: 0px;
         left: -100px;
         top: 50px;
-        /* Điều chỉnh giá trị này để xích hình xuống dưới */
     }
 }
 
@@ -204,8 +202,6 @@ a.more {
     .hero .hero-img-wrap img {
         left: 0px;
         top: 50px;
-        /* Điều chỉnh giá trị này để xích hình xuống dưới */
-        /* position: absolute; */
         right: -50px;
     }
 }
