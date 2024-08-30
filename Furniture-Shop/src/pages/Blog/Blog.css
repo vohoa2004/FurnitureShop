@@ -1,0 +1,106 @@
+.blog-section {
+    padding: 7rem 0 12rem 0;
+}
+
+.blog-section .post-entry a {
+    text-decoration: none;
+}
+
+.blog-section .post-entry .post-thumbnail {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.blog-section .post-entry .post-thumbnail img {
+    border-radius: 20px;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    /* Đảm bảo hình ảnh được cắt để phù hợp */
+}
+
+.blog-section .post-entry .post-content-entry {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.blog-section .post-entry .post-content-entry h3 {
+    font-size: 16px;
+    margin-bottom: 0;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.blog-section .post-entry .post-content-entry .meta {
+    font-size: 14px;
+}
+
+.blog-section .post-entry .post-content-entry .meta a {
+    font-weight: 600;
+}
+
+.blog-section .post-entry:hover .post-thumbnail img,
+.blog-section .post-entry:focus .post-thumbnail img {
+    opacity: .7;
+}
+
+.author {
+    font-weight: bold;
+    color: cadetblue;
+}
+
+.createAt {
+    color: green;
+}
+
+.custom-datetime-input {
+    width: 100%;
+    /* Đặt chiều rộng là 100% để chiếm toàn bộ chiều ngang container */
+    max-width: 300px;
+    /* Giới hạn chiều rộng tối đa */
+    padding: 10px 15px;
+    /* Thêm padding cho input */
+    border: 2px solid #27ae60;
+    /* Đường viền màu xanh lá */
+    border-radius: 8px;
+    /* Bo tròn góc */
+    font-size: 1rem;
+    /* Kích thước font chữ */
+    background-color: #f7f7f7;
+    /* Màu nền nhạt */
+    color: #333;
+    /* Màu chữ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Thêm box shadow nhẹ */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* Hiệu ứng chuyển tiếp khi hover hoặc focus */
+    margin-left: 20%
+}
+
+.custom-datetime-input:focus {
+    border-color: #219150;
+    /* Đổi màu đường viền khi focus */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    /* Tăng cường box shadow khi focus */
+}
+
+.custom-datetime-input:hover {
+    border-color: #1e8449;
+    /* Đổi màu đường viền khi hover */
+}
+
+.search-blog-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 30px 50px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1300px;
+    margin: auto;
+    margin-top: 100px;
+}

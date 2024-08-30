@@ -1,6 +1,6 @@
 ﻿namespace FurnitureShop.API.DTOs.RequestDTOs
 {
-    public class SearchRequestDTO
+    public class SearchFurnitureRequestDTO
     {
         public double? MinPrice { get; set; }
         public double? MaxPrice { get; set; }

@@ -1,4 +1,9 @@
+.before-footer-section {
+    padding: 7rem 0 12rem 0 !important;
+}
+
 .footer-section {
+    margin-top: 200px;
     padding: 80px 0;
     background: #ffffff;
 }

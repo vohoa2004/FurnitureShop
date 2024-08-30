@@ -16,7 +16,7 @@ namespace FurnitureShop.BLL.Utils
     {
         public MapperConfig()
         {
-            CreateMap<SearchRequestDTO, SearchFurnitureModel>();
+            CreateMap<SearchFurnitureRequestDTO, SearchFurnitureModel>();
             CreateMap<FurnitureRequestDTO, FurnitureModel>().ReverseMap();
             CreateMap<Furniture, FurnitureModel>();
             CreateMap<FurnitureModel, Furniture>()
@@ -37,11 +37,17 @@ namespace FurnitureShop.BLL.Utils
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.OrderLines, opt => opt.MapFrom(src => src.OrderLines));
 
-            // map from order 
+            // map from order to order model
             CreateMap<OrderLine, OrderLineModel>()
                 .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product));
             CreateMap<Order, OrderModel>()
                 .ForMember(dest => dest.OrderLines, opt => opt.MapFrom(src => src.OrderLines));
+
+            // map from blog model to blog and resverse
+            CreateMap<Blog, BlogModel>();
+            CreateMap<BlogModel, Blog>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
         }
     }
 }

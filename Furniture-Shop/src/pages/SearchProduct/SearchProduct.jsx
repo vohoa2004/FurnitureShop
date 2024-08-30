@@ -40,48 +40,49 @@ const SearchProduct = () => {
         );
     };
 
-    // Reset currentPage về 1 khi productName, minPrice, maxPrice, hoặc selectedCategories thay đổi
+
+    const fetchProducts = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            // Create an object with all the search parameters
+            const params = {
+                name: productName || undefined,
+                minPrice: minPrice || undefined,
+                maxPrice: maxPrice || undefined,
+                categoryIds: selectedCategories.length > 0 ? selectedCategories : undefined,
+                pageNo: currentPage,
+                pageSize: 8,
+            };
+
+            // Filter out any undefined values
+            const queryParams = Object.keys(params)
+                .filter((key) => params[key] !== undefined)
+                .reduce((acc, key) => {
+                    acc[key] = params[key];
+                    return acc;
+                }, {});
+
+            const response = await searchProducts(queryParams);
+            const list = response.data.items
+            setProducts(list);
+            setTotalPages(response.data.totalPages);
+        } catch (error) {
+            setError('Failed to fetch products');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        setCurrentPage(1);
-    }, [productName, minPrice, maxPrice, selectedCategories]);
-
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                // Create an object with all the search parameters
-                const params = {
-                    name: productName || undefined,
-                    minPrice: minPrice || undefined,
-                    maxPrice: maxPrice || undefined,
-                    categoryIds: selectedCategories.length > 0 ? selectedCategories : undefined,
-                    pageNo: currentPage,
-                    pageSize: 8,
-                };
-
-                // Filter out any undefined values
-                const queryParams = Object.keys(params)
-                    .filter((key) => params[key] !== undefined)
-                    .reduce((acc, key) => {
-                        acc[key] = params[key];
-                        return acc;
-                    }, {});
-
-                const response = await searchProducts(queryParams);
-                const list = response.data.items
-                setProducts(list);
-                setTotalPages(response.data.totalPages);
-            } catch (error) {
-                setError('Failed to fetch products');
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchProducts();
-    }, [productName, minPrice, maxPrice, selectedCategories, currentPage]);
+    }, [currentPage]);
+
+    const handleSearch = () => {
+        setCurrentPage(1);
+        fetchProducts();
+    };
+
 
     console.log(products)
 
@@ -92,73 +93,7 @@ const SearchProduct = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-    if (products.length == 0) {
-        return (<>
-            <Header></Header>
-            {/* search product form: */}
-            <div className="search-product-container">
 
-                <div className="search-field-row">
-                    <input
-                        type="text"
-                        placeholder="Product Name"
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        className="search-field"
-                    />
-                </div>
-                <div className="search-field-row">
-                    <input
-                        type="number"
-                        placeholder="Min Price"
-                        value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
-                        className="search-field"
-                    />
-                    <input
-                        type="number"
-                        placeholder="Max Price"
-                        value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
-                        className="search-field"
-                    />
-                </div>
-                <div className="category-row">
-                    {Object.keys(categoryMap).slice(0, 4).map((categoryName, index) => (
-                        <label key={index} className="category-item">
-                            <input
-                                type="checkbox"
-                                value={categoryName}
-                                onChange={handleCategoryChange}
-                            />
-                            {categoryName}
-                        </label>
-                    ))}
-                </div>
-                <div className="category-row">
-                    {Object.keys(categoryMap).slice(4).map((categoryName, index) => (
-                        <label key={index} className="category-item">
-                            <input
-                                type="checkbox"
-                                value={categoryName}
-                                onChange={handleCategoryChange}
-                            />
-                            {categoryName}
-                        </label>
-                    ))}
-                </div>
-
-            </div>
-
-            {/* search result: */}
-            <div className="untree_co-section product-section before-footer-section">
-                <div className="container">
-                    <p>No products found!</p>
-                </div>
-            </div>
-            <Footer></Footer>
-        </>);
-    }
     return (
         <>
             <Header></Header>
@@ -214,6 +149,14 @@ const SearchProduct = () => {
                         </label>
                     ))}
                 </div>
+                <div>
+
+                    <button className='search-button'
+                        onClick={handleSearch}
+                    >
+                        Search
+                    </button>
+                </div>
 
             </div>
 
@@ -222,7 +165,9 @@ const SearchProduct = () => {
                 <div className="container">
                     <div className="row">
                         {
-                            products.map((product) => (
+                            products.length === 0 ? (
+                                <p className='not-found'>Not found</p>
+                            ) : (products.map((product) => (
                                 <div key={product.id} className="col-12 col-md-4 col-lg-3 mb-5">
                                     <a className="product-item" href={`/product-details/${product.id}`}>
                                         <img src={product.imageLink} className="img-fluid product-thumbnail" alt={product.name} />
@@ -233,7 +178,7 @@ const SearchProduct = () => {
                                         </span>
                                     </a>
                                 </div>
-                            ))}
+                            )))}
                     </div>
                     <Pagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={totalPages}></Pagination>
                 </div>

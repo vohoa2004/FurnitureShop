@@ -68,3 +68,8 @@
     margin-top: 20px;
     margin-left: 45%;
 }
+
+.not-found {
+    font-size: 30px;
+    text-align: center;
+}

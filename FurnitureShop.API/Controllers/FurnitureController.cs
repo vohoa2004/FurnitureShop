@@ -96,7 +96,7 @@ namespace FurnitureShop.API.Controllers
         // 6. Tìm theo tên sp, giá trong vùng min, max price, category thuộc 1 trong các category đc đưa vào dto
         // phân trang 8 sản phẩm trả về
         [HttpGet("Search")]
-        public async Task<IActionResult> Search([FromQuery] SearchRequestDTO dto)
+        public async Task<IActionResult> Search([FromQuery] SearchFurnitureRequestDTO dto)
         {
             var categoryIdsList = dto.GetCategoryIdsList();
             SearchFurnitureModel searchFurnitureModel = _mapper.Map<SearchFurnitureModel>(dto);

@@ -7,6 +7,7 @@ import { useAuth } from '../../hooks';
 
 const ProductDetails = () => {
     const [product, setProduct] = useState(null);
+
     const productId = parseInt(window.location.pathname.split('/')[2])
     const { user, role } = useAuth();
 
