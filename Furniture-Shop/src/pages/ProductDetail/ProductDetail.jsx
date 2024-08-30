@@ -85,7 +85,7 @@ const ProductDetails = () => {
                     <div className="hero-img-wrap2">
                         <img src={product.imageLink} alt={product.name} className="main-product-img" />
                     </div>
-                    <div className="intro-excerpt">
+                    <div className="intro-excerpt2">
                         <h1>{product.name}</h1>
                         <p>{product.description}</p>
                     </div>

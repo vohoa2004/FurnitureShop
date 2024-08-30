@@ -8,13 +8,13 @@ export default function Footer() {
                 <div className="container relative">
 
                     <div className="sofa-img">
-                        <img src="src/assets/images/sofa.png" alt="Image" className="img-fluid" />
+                        <img src="/src/assets/images/sofa.png" alt="Image" className="img-fluid" />
                     </div>
 
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="subscription-form">
-                                <h3 className="d-flex align-items-center"><span className="me-1"><img src="src/assets/images/envelope-outline.svg" alt="Image" className="img-fluid" /></span><span>Subscribe to Newsletter</span></h3>
+                                <h3 className="d-flex align-items-center"><span className="me-1"><img src="/src/assets/images/envelope-outline.svg" alt="Image" className="img-fluid" /></span><span>Subscribe to Newsletter</span></h3>
 
                                 <form action="#" className="row g-3">
                                     <div className="col-auto">

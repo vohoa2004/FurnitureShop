@@ -47,14 +47,14 @@
 }
 
 
-.intro-excerpt {
+.intro-excerpt2 {
     flex: 1;
     padding-left: 10px;
     /* Giảm padding để text gần trái hơn */
     color: #fff;
 }
 
-.intro-excerpt h1 {
+.intro-excerpt2 h1 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 10px;
@@ -62,7 +62,7 @@
     /* Dịch chuyển h1 sang trái */
 }
 
-.intro-excerpt p {
+.intro-excerpt2 p {
     font-size: 1.2rem;
     color: #ddd;
     margin-left: -100px;
