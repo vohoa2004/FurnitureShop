@@ -48,6 +48,10 @@ namespace FurnitureShop.BLL.Utils
             CreateMap<BlogModel, Blog>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
+            // map from address model to address
+            CreateMap<Address, AddressModel>();
+            CreateMap<AddressModel, Address>().ForMember(dest => dest.Id, opt => opt.Ignore());
+
         }
     }
 }

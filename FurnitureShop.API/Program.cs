@@ -77,6 +77,9 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+
 
 var app = builder.Build();
 

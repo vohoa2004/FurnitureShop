@@ -6,7 +6,7 @@ import './SearchProduct.css'
 import './SearchForm.css'
 import { searchProducts } from '../../apis/FurnitureAPIs'
 import Pagination from '../../components/Pagination/Pagination'
-
+import { categoryMap } from '../../utils/enum'
 const SearchProduct = () => {
     const [productName, setProductName] = useState('');
     const [minPrice, setMinPrice] = useState('');
@@ -17,17 +17,6 @@ const SearchProduct = () => {
     const [products, setProducts] = useState([]); // Lưu danh sách sản phẩm trả về từ API
     const [loading, setLoading] = useState(false); // Trạng thái loading khi fetch API
     const [error, setError] = useState(null); // Trạng thái lỗi nếu có lỗi khi fetch API
-
-    const categoryMap = {
-        Chair: 1,
-        Table: 2,
-        Sofa: 3,
-        Bed: 4,
-        Cabinet: 5,
-        'Electronic Device': 6,
-        Bookshelf: 7,
-        Other: 8,
-    };
 
     const handleCategoryChange = (event) => {
         const categoryName = event.target.value;

@@ -1,0 +1,39 @@
+.user-profile {
+    margin-top: 30px;
+}
+
+.user-profile .mdb-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile .mdb-card-body {
+    padding: 20px;
+}
+
+.user-profile .mdb-card-image {
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+    width: 150px;
+    height: 150px;
+}
+
+.user-profile .mdb-card-title {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.mdb-input label {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.mdb-input input {
+    padding-top: 20px;
+}

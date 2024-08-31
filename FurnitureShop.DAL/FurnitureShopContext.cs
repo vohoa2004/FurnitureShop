@@ -25,10 +25,9 @@ namespace FurnitureShop.DAL
         public virtual DbSet<Furniture> Furnitures { get; set;}
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderLine> OrderLines { get; set; }
-
         public virtual DbSet<Blog> Blogs { get; set; }
 
-
+        public virtual DbSet<Address> Addresses { get; set; }
 
     }
 }

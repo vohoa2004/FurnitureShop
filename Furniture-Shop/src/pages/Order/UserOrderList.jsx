@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Footer'
 import { getOrdersByCustomer } from '../../apis/OrderAPIs';
 import { useAuth } from '../../hooks';
 import Pagination from '../../components/Pagination/Pagination';
+import { OrderStatus } from '../../utils/enum';
 
 
 export default function UserOrderList() {
@@ -14,6 +15,11 @@ export default function UserOrderList() {
 
     const customerId = user?.userId
     const pageSize = 3
+
+    const getOrderStatus = (status) => {
+        // Tìm khóa tương ứng với giá trị categoryId trong categoryMap
+        return Object.keys(OrderStatus).find(key => OrderStatus[key] === status);
+    };
 
     useEffect(() => {
         const fetchOrdersByCustomer = async () => {
@@ -162,7 +168,7 @@ export default function UserOrderList() {
                                                         <p className="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
                                                             Status</p>
                                                         <p className="font-semibold text-lg leading-8 text-green-500 text-left whitespace-nowrap">
-                                                            {order.status}</p>
+                                                            {getOrderStatus(order.status)}</p>
                                                     </div>
                                                     <div className="flex flex-col justify-center items-start max-sm:items-center">
                                                         <p className="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
@@ -191,7 +197,7 @@ export default function UserOrderList() {
                                                         d="M14.0261 14.7259L25.5755 26.2753M14.0261 26.2753L25.5755 14.7259" stroke=""
                                                         strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
-                                                cancel order
+                                                Cancel Order
                                             </button>
                                             <p className="font-normal text-xl leading-8 text-gray-500 sm:pl-8">Payment Is Succesfull</p>
                                         </div>

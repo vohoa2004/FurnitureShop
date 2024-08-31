@@ -1,0 +1,59 @@
+.address-selection {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.address-selection h4 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.address-selection .mdb-list-group-item {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+.address-selection .mdb-list-group-item:hover {
+    background-color: #e7f1ff;
+}
+
+.address-selection .mdb-radio {
+    margin-right: 15px;
+    margin-top: 2px;
+}
+
+.address-selection .address-details {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.address-selection .address-details strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.address-selection .mdb-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.address-selection .mdb-btn:hover {
+    background-color: #0056b3;
+}
