@@ -34,7 +34,7 @@ const useAuth = () => {
     const [user, setUser] = useState();
 
     const token = cookieUtils.getToken();
-    console.log(token)
+    // console.log(token)
 
     // Function to check token expiration
     const checkTokenExpiration = useCallback(() => {
@@ -78,9 +78,11 @@ const useAuth = () => {
             const getInfo = async () => {
                 const { data } = await getInfoCurrentUser();
                 setUser(data);
+                console.log(user)
             };
 
             getInfo();
+
         } finally {
             setLoading(false);
         }

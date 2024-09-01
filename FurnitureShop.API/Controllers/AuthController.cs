@@ -62,6 +62,7 @@ namespace FurnitureShop.API.Controllers
             var username = claimsPrincipal?.FindFirst(ClaimTypes.Name)?.Value;
             var status = claimsPrincipal?.FindFirst("status")?.Value;
             var email = claimsPrincipal?.FindFirst(ClaimTypes.Email)?.Value;
+            var fullName = claimsPrincipal?.FindFirst("fullName")?.Value;
 
             var expirationClaim = claimsPrincipal?.FindFirst(JwtRegisteredClaimNames.Exp);
             DateTime? expirationTime = null;
@@ -81,6 +82,7 @@ namespace FurnitureShop.API.Controllers
             {
                 UserId = userId,
                 Username = username,
+                Fullname = fullName,
                 Status = status,
                 Email = email,
                 Roles = roles,

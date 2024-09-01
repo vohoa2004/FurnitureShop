@@ -1,27 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MDBInput, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle } from 'mdb-react-ui-kit';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import "./Profile.css"
-const Profile = () => {
-    const [user, setUser] = useState({
-        fullName: 'Amelia Nguyen',
-        email: 'amelia@example.com',
-        phone: '123-456-7890',
-        address: '123 Example Street, City, Country',
-    });
+import { useAuth } from '../../hooks';
+import { getAccountById } from '../../apis/AccountAPI';
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser((prevUser) => ({
-            ...prevUser,
-            [name]: value,
-        }));
-    };
+const Profile = () => {
+    const [currentUser, setCurrentUser] = useState(null);
+    const { user, role } = useAuth();
+    // console.log("User from useAuth: ", user)
+
+    const customerId = user?.userId;
+    // const customerId = "98826227-b58d-4405-b492-08dcc6a7ae14";
+    console.log("User Id: ", customerId)
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const userResponse = await getAccountById(customerId);
+                console.log("Response:", userResponse)
+                setCurrentUser(userResponse.data);
+            } catch (error) {
+                console.error('Failed to fetch user details', error);
+            }
+        };
+        fetchUserDetails();
+    }, [customerId]);
+
+    console.log("Current user: ", currentUser)
+
+    // phai co phan nay de cho await fetch api, ko thi useEffect khong chay vi customerId khong doi
+    if (currentUser == null) {
+        return <div>Loading...</div>
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Updated user:', user);
+        console.log('Updated user:', currentUser);
     };
 
     return (
@@ -34,10 +50,10 @@ const Profile = () => {
                         <MDBCard>
                             <MDBCardImage src="https://via.placeholder.com/150" position="top" alt="Avatar" />
                             <MDBCardBody>
-                                <MDBCardTitle>{user.fullName}</MDBCardTitle>
-                                <p>Email: {user.email}</p>
-                                <p>Phone: {user.phone}</p>
-                                <p>Address: {user.address}</p>
+                                <MDBCardTitle>Username: {currentUser.username}</MDBCardTitle>
+                                <p>Email: {currentUser.email}</p>
+                                <p>Phone: {currentUser.phone}</p>
+                                <p>Full Name: {currentUser.fullName}</p>
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
@@ -51,40 +67,42 @@ const Profile = () => {
                                             id="fullName"
                                             type="text"
                                             name="fullName"
-                                            value={user.fullName}
-                                            onChange={handleChange}
+                                            value={currentUser.fullName}
+                                        // onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="mb-4">
+                                    {/* <div className="mb-4">
                                         <MDBInput
                                             label="Email"
                                             id="email"
                                             type="email"
                                             name="email"
-                                            value={user.email}
-                                            onChange={handleChange}
+                                            value={currentUser.email}
+                                        // onChange={handleChange}
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="mb-4">
                                         <MDBInput
                                             label="Phone"
                                             id="phone"
                                             type="text"
                                             name="phone"
-                                            value={user.phone}
-                                            onChange={handleChange}
+                                            value={currentUser.phone}
+                                        // onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="mb-4">
+
+                                    {/* Shipping Addresses */}
+                                    {/* <div className="mb-4">
                                         <MDBInput
                                             label="Address"
                                             id="address"
                                             type="text"
                                             name="address"
-                                            value={user.address}
+                                            value={currentUser.address}
                                             onChange={handleChange}
                                         />
-                                    </div>
+                                    </div> */}
                                     <MDBBtn type="submit">Save Changes</MDBBtn>
                                 </form>
                             </MDBCardBody>

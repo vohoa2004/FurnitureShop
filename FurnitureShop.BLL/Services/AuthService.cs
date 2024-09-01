@@ -99,7 +99,8 @@ namespace FurnitureShop.BLL.Services
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("userId", user.Id.ToString()),
-                new Claim("status",user.Status.ToString())
+                new Claim("status",user.Status.ToString()),
+                new Claim("fullName", user.FullName != null ? user.FullName.ToString() : "")
             };
 
             // Thêm các vai trò của người dùng vào danh sách authClaims

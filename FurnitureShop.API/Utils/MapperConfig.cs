@@ -25,6 +25,11 @@ namespace FurnitureShop.BLL.Utils
             CreateMap<RegisterRequestDTO, RegisterModel>();
             CreateMap<RegisterModel, Account>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Account, AccountModel>().ReverseMap();
+
+            // phai co business model rieng cho viec update account
+            CreateMap<UpdateAccountRequestDTO, UpdateAccountModel>();
+            CreateMap<UpdateAccountModel, Account>();
 
             // map from order request dto to order model
             CreateMap<OrderLineRequestDTO, OrderLineModel>();
