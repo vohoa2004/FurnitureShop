@@ -29,5 +29,20 @@ namespace FurnitureShop.DAL
 
         public virtual DbSet<Address> Addresses { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Assuming Orders have a foreign key AddressId referencing Addresses
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.ShippingAddress)
+                .WithMany()
+                .HasForeignKey(o => o.AddressId)
+                .OnDelete(DeleteBehavior.NoAction);  // Or DeleteBehavior.SetNull, DeleteBehavior.Restrict, etc.
+
+            // Configure other entities and relationships here...
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+
     }
 }

@@ -17,7 +17,8 @@ namespace FurnitureShop.BLL.BusinessModels
         public double TotalPrice { get; set; }
         public Guid CustomerId { get; set; } // Khóa ngoại cho Customer
         public AccountModel? Customer { get; set; } // n-1
-
+        public int AddressId { get; set; }
+        public AddressModel? ShippingAddress { get; set; }
         public required List<OrderLineModel> OrderLines { get; set; }
 
         public required OrderStatus Status { get; set; }

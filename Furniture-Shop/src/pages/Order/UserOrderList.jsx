@@ -65,6 +65,13 @@ export default function UserOrderList() {
         return `${formattedDate} ${formattedTime}`
     }
 
+    const getPaymentButton = (order) => {
+        if (order.transactionId1 == null) {
+            return "Make Payment"
+        }
+        return "Paid"
+    }
+
     return (
         <div>
             <Header></Header>
@@ -132,8 +139,8 @@ export default function UserOrderList() {
                                                 className="rounded-full px-7 py-3 bg-white text-gray-900 border border-gray-300 font-semibold text-sm shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-400">Show
                                                 Invoice</button>
                                             <button
-                                                className="rounded-full px-7 py-3 bg-indigo-600 shadow-sm shadow-transparent text-white font-semibold text-sm transition-all duration-500 hover:shadow-indigo-400 hover:bg-indigo-700">Buy
-                                                Now</button>
+                                                className="rounded-full px-7 py-3 bg-indigo-600 shadow-sm shadow-transparent text-white font-semibold text-sm transition-all duration-500 hover:shadow-indigo-400 hover:bg-indigo-700">{getPaymentButton(order)}
+                                            </button>
 
                                         </div>
                                     </div>
@@ -199,7 +206,7 @@ export default function UserOrderList() {
                                                 </svg>
                                                 Cancel Order
                                             </button>
-                                            <p className="font-normal text-xl leading-8 text-gray-500 sm:pl-8">Payment Is Succesfull</p>
+                                            {/* <p className="font-normal text-xl leading-8 text-gray-500 sm:pl-8">Payment Is Succesfull</p> */}
                                         </div>
                                         <p className="font-semibold text-xl leading-8 text-black max-sm:py-4"> <span className="text-gray-500">Total
                                             Price: </span> &nbsp;{formattedPrice(order.totalPrice)} VND</p>

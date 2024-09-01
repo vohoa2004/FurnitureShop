@@ -13,8 +13,10 @@ import { getAddressesByUser } from '../../apis/AccountAPI';
 export default function Checkout() {
   const checkoutCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
   if (checkoutCart == []) {
+    alert("You have no order to checkout!")
     navigate("/")
   }
+
   const { user, role } = useAuth();
 
   const navigate = useNavigate();
@@ -22,12 +24,16 @@ export default function Checkout() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(0);
   const [isChecked, setIsChecked] = useState(false); // for privacy and terms
   const [addresses, setAddresses] = useState([])
-  const [selectedAddressId, setSelectedAddressId] = useState(0)
+  const [addressId, setAddressId] = useState(0)
 
   const customerId = user?.userId; // Lấy customerId từ hệ thống authentication
 
   const calculateTotalPrice = () => {
     const total = checkoutCart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    if (total == 0) {
+      // alert("You have no order to checkout!")
+      navigate("/")
+    }
     return total;
   };
 
@@ -45,8 +51,8 @@ export default function Checkout() {
     fetchAddressesByCustomer();
   }, [customerId]);
 
-  const onSelectAddress = () => {
-
+  const onSelectAddress = (selectedAddressId) => {
+    setAddressId(selectedAddressId)
   }
 
   // for payment choice
@@ -62,6 +68,7 @@ export default function Checkout() {
 
   const orderDTO = {
     customerId: customerId,
+    addressId: addressId,
     lines: checkoutCart.map(item => ({
       productId: item.id,
       quantity: item.quantity,
@@ -80,6 +87,12 @@ export default function Checkout() {
       alert("You must agree to the Privacy and Terms before placing the order.");
       return;
     }
+
+    if (addressId == 0) {
+      alert("You must choose an address selection!");
+      return;
+    }
+
     try {
       if (orderDTO.paymentMethod > 0) {
         localStorage.setItem('orderDTO', JSON.stringify(orderDTO));
@@ -156,7 +169,7 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <AddressSelection addresses={addresses} selectedAddressId={selectedAddressId} onSelectAddress={onSelectAddress}></AddressSelection>
+                <AddressSelection addresses={addresses} selectedAddressId={addressId} onSelectAddress={onSelectAddress}></AddressSelection>
                 <br />
                 {/* add more address 
                 => add a button to add new addess: call api to store the new address*/}

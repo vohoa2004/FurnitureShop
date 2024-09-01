@@ -46,7 +46,7 @@ namespace FurnitureShop.DAL.Entities
         [Required]
         public AccountStatus Status { get; set; }
 
-        public virtual ICollection<Address> ShippingAddress { get; set; } = new HashSet<Address>();
+        public virtual ICollection<Address> ShippingAddresses { get; set; } = new HashSet<Address>();
 
         public virtual ICollection<AccountRole> AccountRoles { get; set; } = new List<AccountRole>(); // n-n relationship
     }

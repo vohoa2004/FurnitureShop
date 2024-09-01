@@ -71,6 +71,10 @@ const ProductDetails = () => {
 
         const customerId = user?.userId; // lấy customerId từ hệ thống authentication
 
+        if (product.availableQuantity == 0) {
+            alert("This product is out of stock, you cannot order it at this time! Put it to your wishlist and comeback later!");
+            return;
+        }
         addToCart(customerId, product);
     };
 
@@ -89,6 +93,7 @@ const ProductDetails = () => {
                     <div className="intro-excerpt2">
                         <h1>{product.name}</h1>
                         <p>{product.description}</p>
+                        <p>Available quantity: {product.availableQuantity}</p>
                     </div>
                 </div>
 
@@ -113,6 +118,7 @@ const ProductDetails = () => {
                             <li>Available in multiple colors</li>
                         </ul>
 
+                        {/* quantity = 0 thi ko hien nut nay */}
                         <div className="product-pricing">
                             <strong>{formattedPrice(product.price)} VND</strong>
                             <a href='/cart' className="btn btn-primary" onClick={() => handleAddToCart(product)}>Add to Cart</a>

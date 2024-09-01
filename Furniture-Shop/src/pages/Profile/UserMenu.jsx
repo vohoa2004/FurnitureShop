@@ -27,7 +27,7 @@ const UserMenu = () => {
                     console.log('Icon clicked');
                     setMenuOpen(!menuOpen)
                 }}>
-                    <img src="src/assets/images/user.svg" alt="User" />
+                    <img src="/src/assets/images/user.svg" alt="User" />
                 </a>
                 {menuOpen && (
                     <div className="dropdown-menu" style={{ position: 'absolute', top: '100%', right: 0 }}>

@@ -17,10 +17,16 @@ namespace FurnitureShop.DAL.Entities
         public DateTime CreatedAt { get; set; }
 
         public double TotalPrice { get; set; }
+        
         public Guid CustomerId { get; set; } // Khóa ngoại cho Customer
 
         [ForeignKey("CustomerId")]
         public virtual required Account Customer { get; set; } // n-1
+        
+        public int AddressId { get; set; }
+
+        [ForeignKey("AddressId")]
+        public virtual required Address ShippingAddress { get; set; }
 
         public virtual ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 
@@ -29,6 +35,8 @@ namespace FurnitureShop.DAL.Entities
         public string? TransactionId1 { get; set; }
         public string? TransactionTime1 { get; set; }
         public double AmountTransaction1 { get; set; }
+
+        // if trans 1 is deposit
         public string? TransactionId2 { get; set; }
         public string? TransactionTime2 { get; set; }
         public double AmountTransaction2 { get; set; }

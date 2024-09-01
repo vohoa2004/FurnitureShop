@@ -51,32 +51,43 @@ export default function Cart() {
     }, [customerId, cart]);
 
     const updateQuantity = (productId, newQuantity) => {
+        // Cập nhật state với số lượng mới
         const updatedCartItems = cartItems.map(item => {
             if (item.id === productId) {
-                return { ...item, quantity: newQuantity }; // Chỉ cập nhật số lượng cho sản phẩm cụ thể
+                if (newQuantity > item.availableQuantity) {
+                    alert("New quantity is higher than available quantity!");
+                    return { ...item, quantity: item.availableQuantity }; // Đặt quantity thành availableQuantity nếu vượt quá
+                }
+                return { ...item, quantity: newQuantity }; // Chỉ cập nhật số lượng nếu điều kiện trên không xảy ra
             }
             return item; // Các sản phẩm khác không thay đổi
         });
 
-        // Cập nhật state và lưu lại trong localStorage
+        // Cập nhật state với cart đã cập nhật
         setCartItems(updatedCartItems);
 
-        const updatedCartItemsInLocalStorage = cartItems.map(item => {
-            if (item.id === productId) {
-                return { productId: item.id, quantity: newQuantity }; // Chỉ cập nhật số lượng cho sản phẩm cụ thể
-            }
-            return { productId: item.id, quantity: item.quantity }; // Các sản phẩm khác không thay đổi
+        // Sử dụng updatedCartItems để lưu vào localStorage
+        const updatedCartItemsInLocalStorage = updatedCartItems.map(item => {
+            return { productId: item.id, quantity: item.quantity }; // Cập nhật tất cả các sản phẩm
         });
+
         updateCartInLocalStorage(updatedCartItemsInLocalStorage);
     };
+
 
     // Hàm để xóa sản phẩm khỏi giỏ hàng
     const removeItem = (productId) => {
         const updatedCartItems = cartItems.filter(item => item.id !== productId);
 
-        // Cập nhật state và lưu lại trong localStorage
+        // Cập nhật state
         setCartItems(updatedCartItems);
-        updateCartInLocalStorage(updatedCartItems);
+
+        // Cập nhật localStorage với updatedCartItems
+        const updatedCartItemsInLocalStorage = updatedCartItems.map(item => {
+            return { productId: item.id, quantity: item.quantity }; // Các sản phẩm khác không thay đổi
+        });
+
+        updateCartInLocalStorage(updatedCartItemsInLocalStorage);
     };
 
     // Hàm để lưu cart vào localStorage
@@ -86,6 +97,7 @@ export default function Cart() {
         localStorage.setItem('cart-furniture', JSON.stringify(cart));
     };
 
+    // checkout cart to store to go to checkout site only
     function proceedToCheckout() {
         // Giả sử cartItems là mảng chứa các sản phẩm trong giỏ hàng
         localStorage.setItem('checkoutCart', JSON.stringify(cartItems));
